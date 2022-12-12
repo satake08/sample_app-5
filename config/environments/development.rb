@@ -103,3 +103,13 @@ end
 #ビューファイルを記述→app/views/lists/index.html.e内に「<h1>投稿一覧</h1>～<% end %>」を新規追加
 #Routingを設定→config/routes.rb内の「get 'lists/index'」を削除、代わりに「Rails.application.routes.draw do～end」を追加
 #「rails s」で起動→/lists/newにアクセス→「タイトル:test1」「本文:title1」で投稿押す→２回やる→/listsにアクセスして２つづつ表示されたら完了
+
+#詳細画面を作る
+#ルーディングの追加→config/routes.rb内の「get 'lists/show'」を削除、代わりに「Rails.application.routes.draw do～end」を追加
+#showアクションを作成→app/controllers/lists_controller.rb内の「def show..end」の「end」の上に「 @list = List.find(params[:id])」追記
+#show.html.erbを作成・ビューに記述→app/views/lists/show.html.erb内に「<h2>タイトル</h2>～<p><%= @list.body %></p>」記述
+#indexにshowへのリンクを作成→app/views/lists/index.html.erb内の「<span></span>」内を変更
+#ルーティング(名前付きルート設定)→config/routes.rb内
+#config/routes.rb内の「get 'lists/:id' => 'lists#show'」を「get 'lists/:id' => 'lists#show', as: 'list'」に書き換え
+ #indexのlink_toを変更→app/views/lists/index.html.erb内の「<span></span>」内を「 <%= link_to list.title, list_path(list.id) %> 」に変更
+ #createアクションのredirect_toを変更→app/controllers/lists_controller.rb内の「def create..end」内の「redirect_to '/top'」を「redirect_to list_path(list.id) 」に変更

@@ -4,6 +4,9 @@
 <% @lists.each do |list| %><!--@listsの前に＝がない-->
 
   <p>タイトル</p>
-  <span><%= list.title %></span>
+  <!--<span>%= list.title, %></span>↓に変更-->
+  <span>
+    <%= link_to list.title, "/lists/#{list.id}" %>
+  </span>
 
 <% end %>
